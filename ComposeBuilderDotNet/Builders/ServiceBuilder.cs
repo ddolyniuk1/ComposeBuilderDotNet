@@ -96,7 +96,7 @@ namespace ComposeBuilderDotNet.Builders
             }
             var dependsOnList = WorkingObject["depends_on"] as List<string>;
 
-            dependsOnList?.AddRange(dependsOn);
+            dependsOnList?.AddRange(services);
             return this;
         }
 
