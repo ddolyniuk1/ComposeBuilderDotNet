@@ -1,5 +1,5 @@
 # ComposeBuilderDotNet
-Generate Docker-Compose files in C# using the popular builder design pattern
+Generate docker-compose YAML in C# using the builder design pattern
 
 ```csharp
 var dbUser = "root";
