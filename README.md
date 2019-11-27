@@ -23,7 +23,7 @@ var mysql = Builder.MakeService("db")
         .WithProperty("MYSQL_USER", dbUser)
         .WithProperty("MYSQL_PASSWORD", dbPass)
     )
-    .WithRestartPolicy(ERestartMode.Always)     // restart policy
+    .WithRestartPolicy(ERestartMode.Always) 
     .WithSwarm()
     .WithDeploy(d => d
         .WithMode(EReplicationMode.Replicated)
@@ -40,8 +40,8 @@ var wordpress = Builder.MakeService("wordpress")
         .WithProperty("WORDPRESS_DB_PASSWORD", dbPass)
         .WithProperty("WORDPRESS_DB_NAME", dbName)
     )
-    .WithDependencies(mysql)                       // depends on mysql service
-    .WithRestartPolicy(ERestartMode.UnlessStopped) // restart policy
+    .WithDependencies(mysql) 
+    .WithRestartPolicy(ERestartMode.UnlessStopped) 
     .WithSwarm()
     .WithDeploy(d => d
         .WithMode(EReplicationMode.Global) 
