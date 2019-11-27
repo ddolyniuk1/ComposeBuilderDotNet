@@ -27,8 +27,7 @@ namespace ComposeBuilderDotNet.Examples.Complex
             var mysql = Builder.MakeService("db")
                 .WithImage("mysql:5.7")
                 .WithNetworks(network1)
-                .WithExposed("3306")
-                .WithContainerName("mysql-db")
+                .WithExposed("3306") 
                 .WithEnvironment(mb => mb
                     .WithProperty("MYSQL_ROOT_PASSWORD", dbPass)
                     .WithProperty("MYSQL_DATABASE", dbName)
@@ -44,8 +43,7 @@ namespace ComposeBuilderDotNet.Examples.Complex
             var wordpress = Builder.MakeService("wordpress")
                 .WithImage("wordpress:latest")
                 .WithNetworks(network1, network2)
-                .WithPortMapping("8000:80")
-                .WithContainerName("wordpress")
+                .WithPortMapping("8000:80") 
                 .WithEnvironment(mb => mb
                     .WithProperty("WORDPRESS_DB_HOST", $"{mysql.Name}:3306")
                     .WithProperty("WORDPRESS_DB_USER", dbUser)
