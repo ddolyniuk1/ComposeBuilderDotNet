@@ -17,11 +17,10 @@ namespace ComposeBuilderDotNet.Examples.Complex
             var dbName = "wordpress"; 
 
             var network1 = Builder.MakeNetwork("my-net")
-                .SetExternal(false)
+                .SetExternal(true)                       
                 .Build();
 
-            var network2 = Builder.MakeNetwork("my-net2")
-                .SetExternal(false)
+            var network2 = Builder.MakeNetwork("my-net2") 
                 .Build();
 
             var mysql = Builder.MakeService("db")
@@ -34,6 +33,7 @@ namespace ComposeBuilderDotNet.Examples.Complex
                     .WithProperty("MYSQL_USER", dbUser)
                     .WithProperty("MYSQL_PASSWORD", dbPass)
                 )
+                .WithRestartPolicy(ERestartMode.Always)     // restart policy
                 .WithSwarm()
                 .WithDeploy(d => d
                     .WithMode(EReplicationMode.Replicated)
@@ -50,6 +50,8 @@ namespace ComposeBuilderDotNet.Examples.Complex
                     .WithProperty("WORDPRESS_DB_PASSWORD", dbPass)
                     .WithProperty("WORDPRESS_DB_NAME", dbName)
                 )
+                .WithDependencies(mysql)                       // depends on mysql service
+                .WithRestartPolicy(ERestartMode.UnlessStopped) // restart policy
                 .WithSwarm()
                 .WithDeploy(d => d
                     .WithMode(EReplicationMode.Global) 
@@ -61,7 +63,9 @@ namespace ComposeBuilderDotNet.Examples.Complex
                 .WithNetworks(network1, network2)
                 .Build();
 
+            // serialize our object graph to yaml for writing to a docker-compose file
             var result = compose.Serialize();
+
             var path = GetExecutingDirectory() + "/docker-compose.yml";
 
             try

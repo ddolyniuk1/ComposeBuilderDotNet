@@ -6,13 +6,11 @@ var dbUser = "root";
 var dbPass = "pass";
 var dbName = "wordpress"; 
 
-// define our networks to be spun up
-var network1 = Builder.MakeNetwork("my-net") 
-    .SetExternal(false) 
+var network1 = Builder.MakeNetwork("my-net")
+    .SetExternal(true)                       
     .Build();
 
-var network2 = Builder.MakeNetwork("my-net2")
-    .SetExternal(false) 
+var network2 = Builder.MakeNetwork("my-net2") 
     .Build();
 
 var mysql = Builder.MakeService("db")
@@ -25,6 +23,7 @@ var mysql = Builder.MakeService("db")
         .WithProperty("MYSQL_USER", dbUser)
         .WithProperty("MYSQL_PASSWORD", dbPass)
     )
+    .WithRestartPolicy(ERestartMode.Always)     // restart policy
     .WithSwarm()
     .WithDeploy(d => d
         .WithMode(EReplicationMode.Replicated)
@@ -41,6 +40,8 @@ var wordpress = Builder.MakeService("wordpress")
         .WithProperty("WORDPRESS_DB_PASSWORD", dbPass)
         .WithProperty("WORDPRESS_DB_NAME", dbName)
     )
+    .WithDependencies(mysql)                       // depends on mysql service
+    .WithRestartPolicy(ERestartMode.UnlessStopped) // restart policy
     .WithSwarm()
     .WithDeploy(d => d
         .WithMode(EReplicationMode.Global) 
@@ -52,7 +53,7 @@ var compose = Builder.MakeCompose()
     .WithNetworks(network1, network2)
     .Build();
 
-// generate the yaml for writing to a docker-compose.yml file
+// serialize our object graph to yaml for writing to a docker-compose file
 var result = compose.Serialize();
 
 ```
