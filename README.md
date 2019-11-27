@@ -1,10 +1,14 @@
-# ComposeBuilderDotNet
-    
-The goal of this project is to generate docker-compose literate YAML in C# using the builder design pattern
+# ComposeBuilderDotNet    
 
+## What is this projects goal?
+    The goal of this project is to generate docker-compose literate YAML in C# using the builder design pattern
+
+## What is the inspiration for this project?
     This project was inspired by The need to create dynamically generated docker-compose files the right way, 
-    without using templates and replacement techniques; as well as providing a wide range of developer friendly
-    methods and enums for quick access without the need to constantly check documentation.
+without using templates and replacement techniques; as well as providing a wide range of developer friendly
+methods and enums for quick access without the need to constantly check documentation.
+
+## Example Code
 
 ```csharp
 var dbUser = "root";
