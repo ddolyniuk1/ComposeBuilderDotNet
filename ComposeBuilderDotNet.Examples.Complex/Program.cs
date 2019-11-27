@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using ComposeBuilderDotNet.Builders;
@@ -11,56 +12,80 @@ namespace ComposeBuilderDotNet.Examples.Complex
     {
         public static void Main(string[] args)
         {
-            var service1 = Builder.MakeService("test")
-                .WithImage("edge360/vms.ignite")
-                .WithNetworks("someNetwork")
-                .WithExposed("9042")
-                .WithContainerName("ignite.db")
-                .Build();
-            var service2 = Builder.MakeService("test2")
-                .WithImage("edge360/vms.apigateway")
-                .WithNetworks("someNetwork")
-                .WithPortMapping("5001:5001")
-                .WithContainerName("test2")
-                .WithEnvironment("test=true", "buildtype=dev")
-                .WithMap("build", m => {
-                    m.WithProperty("context", "./")
-                   .WithProperty("dockerfile", "./dockerfile");
-                })
-                .WithSwarm()
-                .WithDeploy(d => {
-                    d.WithMode(EReplicationMode.Global)
-                    .WithReplicas(5);
-                })
-                .Build();
-            var network1 = Builder.MakeNetwork("someNetwork")
+            var dbUser = "root";
+            var dbPass = "pass";
+            var dbName = "wordpress"; 
+
+            var network1 = Builder.MakeNetwork("my-net")
                 .SetExternal(false)
                 .Build();
-            var compose = Builder.MakeCompose("3.7")
-                .WithServices(service1, service2)
+
+            var network2 = Builder.MakeNetwork("my-net2")
+                .SetExternal(false)
+                .Build();
+
+            var mysql = Builder.MakeService("db")
+                .WithImage("mysql:5.7")
                 .WithNetworks(network1)
+                .WithExposed("3306")
+                .WithContainerName("mysql-db")
+                .WithEnvironment(mb => mb
+                    .WithProperty("MYSQL_ROOT_PASSWORD", dbPass)
+                    .WithProperty("MYSQL_DATABASE", dbName)
+                    .WithProperty("MYSQL_USER", dbUser)
+                    .WithProperty("MYSQL_PASSWORD", dbPass)
+                )
+                .WithSwarm()
+                .WithDeploy(d => d
+                    .WithMode(EReplicationMode.Replicated)
+                    .WithReplicas(3))
+                .Build();
+
+            var wordpress = Builder.MakeService("wordpress")
+                .WithImage("wordpress:latest")
+                .WithNetworks(network1, network2)
+                .WithPortMapping("8000:80")
+                .WithContainerName("wordpress")
+                .WithEnvironment(mb => mb
+                    .WithProperty("WORDPRESS_DB_HOST", $"{mysql.Name}:3306")
+                    .WithProperty("WORDPRESS_DB_USER", dbUser)
+                    .WithProperty("WORDPRESS_DB_PASSWORD", dbPass)
+                    .WithProperty("WORDPRESS_DB_NAME", dbName)
+                )
+                .WithSwarm()
+                .WithDeploy(d => d
+                    .WithMode(EReplicationMode.Global) 
+                )
+                .Build();
+
+            var compose = Builder.MakeCompose()
+                .WithServices(mysql, wordpress)
+                .WithNetworks(network1, network2)
                 .Build();
 
             var result = compose.Serialize();
             var path = GetExecutingDirectory() + "/docker-compose.yml";
-             
+
             try
             {
                 var directory = AppDomain.CurrentDomain.BaseDirectory + "output";
-                if(!Directory.Exists(directory))
-                {   
+                if (!Directory.Exists(directory))
+                {
                     Directory.CreateDirectory(directory);
                 }
+
                 File.WriteAllText(directory + "\\docker-compose.yml", result);
-                System.Diagnostics.Process.Start("explorer.exe", directory);
+                Process.Start("explorer.exe", directory);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
+
             Console.WriteLine(result);
-            Console.ReadLine(); 
+            Console.ReadLine();
         }
+
         public static DirectoryInfo GetExecutingDirectory()
         {
             var location = new Uri(Assembly.GetEntryAssembly().GetName().CodeBase);

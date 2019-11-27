@@ -53,6 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Emitters\ForceQuotedStringValuesEventEmitter.cs" />
+    <Compile Include="Enums\ERestartMode.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
     <Compile Include="Model\Base\ObjectBase.cs" />
     <Compile Include="Builders\Base\BuilderBase.cs" />
     <Compile Include="Builders\Builder.cs" />

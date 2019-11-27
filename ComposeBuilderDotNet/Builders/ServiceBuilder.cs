@@ -1,5 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using ComposeBuilderDotNet.Builders.Base;
+using ComposeBuilderDotNet.Enums;
+using ComposeBuilderDotNet.Extensions;
 using ComposeBuilderDotNet.Model;
 
 namespace ComposeBuilderDotNet.Builders
@@ -55,6 +59,17 @@ namespace ComposeBuilderDotNet.Builders
             return this;
         }
 
+        public ServiceBuilder WithNetworks(params Network[] networks)
+        {
+            if (WorkingObject.Networks == null)
+            {
+                WorkingObject.Networks = new List<string>();
+            }
+
+            WorkingObject.Networks.AddRange(networks.Select(t => t.Name));
+            return this;
+        }
+
         public ServiceBuilder WithEnvironment(params string[] environmentMappings)
         {
             if (WorkingObject.Environment == null)
@@ -66,6 +81,30 @@ namespace ComposeBuilderDotNet.Builders
             return this;
         }
 
+        public ServiceBuilder WithEnvironment(Action<MapBuilder> environmentExpression)
+        {
+            var mb = new MapBuilder().WithName("environment");
+            environmentExpression(mb);
+            return WithMap(mb.Build()); 
+        }
+
+        public ServiceBuilder WithDependencies(params string[] services)
+        {
+            if (!WorkingObject.ContainsKey("depends_on"))
+            {
+                WorkingObject["depends_on"] = new List<string>();
+            }
+            var dependsOnList = WorkingObject["depends_on"] as List<string>;
+
+            dependsOnList?.AddRange(dependsOn);
+            return this;
+        }
+
+        public ServiceBuilder WithDependencies(params Service[] services)
+        {
+            return WithDependencies(services.Select(t => t.Name).ToArray());
+        }
+
         public ServiceBuilder WithVolumes(params string[] volumes)
         {
             if (WorkingObject.Volumes == null)
@@ -75,6 +114,11 @@ namespace ComposeBuilderDotNet.Builders
 
             WorkingObject.Volumes.AddRange(volumes);
             return this;
+        }
+
+        public ServiceBuilder WithRestartPolicy(ERestartMode mode)
+        {
+            return WithProperty("restart", mode.GetDescription());
         }
 
         public SwarmServiceBuilder WithSwarm()

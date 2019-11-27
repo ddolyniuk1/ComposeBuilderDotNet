@@ -1,4 +1,5 @@
 ﻿using ComposeBuilderDotNet.Enums;
+using ComposeBuilderDotNet.Extensions;
 
 namespace ComposeBuilderDotNet.Builders
 {
@@ -11,7 +12,7 @@ namespace ComposeBuilderDotNet.Builders
 
         public DeployBuilder WithMode(EReplicationMode mode)
         {
-            return WithProperty("mode", mode.ToString().ToLowerInvariant()) as DeployBuilder;
+            return WithProperty("mode", mode.GetDescription()) as DeployBuilder;
         }
 
         public DeployBuilder WithReplicas(int replicas)
