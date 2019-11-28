@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ProjectAstral")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("ComposeBuilderDotNet")]
+[assembly: AssemblyDescription("For generating docker-compose literate YAML in C# using the builder design pattern")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ProjectAstral")]
+[assembly: AssemblyProduct("ComposeBuilderDotNet")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
