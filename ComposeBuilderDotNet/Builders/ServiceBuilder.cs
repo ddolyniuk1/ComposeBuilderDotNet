@@ -14,15 +14,46 @@ namespace ComposeBuilderDotNet.Builders
         {
         }
 
-        public ServiceBuilder WithPortMapping(params string[] mappings)
+        public ServiceBuilder WithContainerName(string containerName)
         {
-            if (WorkingObject.Ports == null)
+            WorkingObject.ContainerName = containerName;
+            return this;
+        }
+
+        public ServiceBuilder WithDependencies(params string[] services)
+        {
+            if (!WorkingObject.ContainsKey("depends_on"))
             {
-                WorkingObject.Ports = new List<string>();
+                WorkingObject["depends_on"] = new List<string>();
             }
 
-            WorkingObject.Ports.AddRange(mappings);
+            var dependsOnList = WorkingObject["depends_on"] as List<string>;
+
+            dependsOnList?.AddRange(services);
             return this;
+        }
+
+        public ServiceBuilder WithDependencies(params Service[] services)
+        {
+            return WithDependencies(services.Select(t => t.Name).ToArray());
+        }
+
+        public ServiceBuilder WithEnvironment(params string[] environmentMappings)
+        {
+            if (WorkingObject.Environment == null)
+            {
+                WorkingObject.Environment = new List<string>();
+            }
+
+            WorkingObject.Environment.AddRange(environmentMappings);
+            return this;
+        }
+
+        public ServiceBuilder WithEnvironment(Action<MapBuilder> environmentExpression)
+        {
+            var mb = new MapBuilder().WithName("environment");
+            environmentExpression(mb);
+            return WithMap(mb.Build());
         }
 
         public ServiceBuilder WithExposed(params string[] exposed)
@@ -36,9 +67,14 @@ namespace ComposeBuilderDotNet.Builders
             return this;
         }
 
-        public ServiceBuilder WithContainerName(string containerName)
+        public ServiceBuilder WithExposed(params object[] exposed)
         {
-            WorkingObject.ContainerName = containerName;
+            if (WorkingObject.Expose == null)
+            {
+                WorkingObject.Expose = new List<string>();
+            }
+
+            WorkingObject.Expose.AddRange(exposed.Select(t => t.ToString()));
             return this;
         }
 
@@ -70,49 +106,25 @@ namespace ComposeBuilderDotNet.Builders
             return this;
         }
 
-        public ServiceBuilder WithEnvironment(params string[] environmentMappings)
+        public ServiceBuilder WithPortMapping(params string[] mappings)
         {
-            if (WorkingObject.Environment == null)
+            if (WorkingObject.Ports == null)
             {
-                WorkingObject.Environment = new List<string>();
+                WorkingObject.Ports = new List<string>();
             }
 
-            WorkingObject.Environment.AddRange(environmentMappings);
+            WorkingObject.Ports.AddRange(mappings);
             return this;
         }
 
-        public ServiceBuilder WithEnvironment(Action<MapBuilder> environmentExpression)
+        public ServiceBuilder WithPortMapping(params object[] mappings)
         {
-            var mb = new MapBuilder().WithName("environment");
-            environmentExpression(mb);
-            return WithMap(mb.Build()); 
-        }
-
-        public ServiceBuilder WithDependencies(params string[] services)
-        {
-            if (!WorkingObject.ContainsKey("depends_on"))
+            if (WorkingObject.Ports == null)
             {
-                WorkingObject["depends_on"] = new List<string>();
-            }
-            var dependsOnList = WorkingObject["depends_on"] as List<string>;
-
-            dependsOnList?.AddRange(services);
-            return this;
-        }
-
-        public ServiceBuilder WithDependencies(params Service[] services)
-        {
-            return WithDependencies(services.Select(t => t.Name).ToArray());
-        }
-
-        public ServiceBuilder WithVolumes(params string[] volumes)
-        {
-            if (WorkingObject.Volumes == null)
-            {
-                WorkingObject.Volumes = new List<string>();
+                WorkingObject.Ports = new List<string>();
             }
 
-            WorkingObject.Volumes.AddRange(volumes);
+            WorkingObject.Ports.AddRange(mappings.Select(t => t.ToString()));
             return this;
         }
 
@@ -124,6 +136,17 @@ namespace ComposeBuilderDotNet.Builders
         public SwarmServiceBuilder WithSwarm()
         {
             return new SwarmServiceBuilder {WorkingObject = WorkingObject};
+        }
+
+        public ServiceBuilder WithVolumes(params string[] volumes)
+        {
+            if (WorkingObject.Volumes == null)
+            {
+                WorkingObject.Volumes = new List<string>();
+            }
+
+            WorkingObject.Volumes.AddRange(volumes);
+            return this;
         }
     }
 }
