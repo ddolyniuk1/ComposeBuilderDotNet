@@ -133,6 +133,22 @@ namespace ComposeBuilderDotNet.Builders
             return WithProperty("restart", mode.GetDescription());
         }
 
+        public ServiceBuilder WithSecrets(params string[] secrets)
+        {
+            if (WorkingObject.Secrets == null)
+            {
+                WorkingObject.Secrets = new List<string>();
+            }
+
+            WorkingObject.Secrets.AddRange(secrets);
+            return this;
+        }
+
+        public ServiceBuilder WithSecrets(params Secret[] secrets)
+        {
+            return WithSecrets(secrets.Select(t => t.Name).ToArray());
+        }
+
         public SwarmServiceBuilder WithSwarm()
         {
             return new SwarmServiceBuilder {WorkingObject = WorkingObject};

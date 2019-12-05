@@ -27,6 +27,17 @@
             return new VolumeBuilder().WithName(name);
         }
 
+        public static SecretBuilder MakeSecret()
+        {
+            return new SecretBuilder();
+        }
+
+        public static SecretBuilder MakeSecret(string name)
+        {
+            return new SecretBuilder().WithName(name);
+        }
+
+
         public static NetworkBuilder MakeNetwork()
         {
             return new NetworkBuilder();

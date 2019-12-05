@@ -48,5 +48,11 @@ namespace ComposeBuilderDotNet.Model
             get => GetProperty<List<string>>("expose");
             set => SetProperty("expose", value);
         }
+
+        public List<string> Secrets
+        {
+            get => GetProperty<List<string>>("secrets");
+            set => SetProperty("secrets", value);
+        }
     }
 }

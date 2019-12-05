@@ -24,6 +24,12 @@ namespace ComposeBuilderDotNet.Model
             get => GetProperty<Dictionary<string, Network>>("networks");
             set => SetProperty("networks", value);
         }
+         
+        public Dictionary<string, Secret> Secrets
+        {
+            get => GetProperty<Dictionary<string, Secret>>("secrets");
+            set => SetProperty("secrets", value);
+        }
 
         public Dictionary<string, Volume> Volumes
         {

@@ -13,13 +13,14 @@
     <PackageId>ComposeBuilderDotNet</PackageId>
     <Product>ComposeBuilderDotNet</Product>
     <Copyright>2019</Copyright>
-    <Version>1.0.3</Version>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
-    <FileVersion>1.0.3.0</FileVersion>
-    <PackageLicenseExpression></PackageLicenseExpression>
+    <Version>1.0.4</Version>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <LangVersion>7.1</LangVersion>
     <RepositoryUrl>https://github.com/ddolyniuk1/ComposeBuilderDotNet</RepositoryUrl>
     <PackageProjectUrl>https://github.com/ddolyniuk1/ComposeBuilderDotNet</PackageProjectUrl>
+    <PackageTags>Docker Docker-Compose Builder</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>

@@ -87,5 +87,30 @@ namespace ComposeBuilderDotNet.Builders
 
             return this;
         }
+
+        /// <summary>
+        ///     Add secrets to the compose object
+        /// </summary>
+        /// <param name="secrets"></param>
+        /// <returns></returns>
+        public ComposeBuilder WithSecrets(params Secret[] secrets)
+        {
+            if (WorkingObject.Secrets == null)
+            {
+                WorkingObject.Secrets = new Dictionary<string, Secret>();
+            }
+
+            foreach (var secret in secrets)
+            {
+                if (WorkingObject.Secrets.ContainsKey(secret.Name))
+                {
+                    throw new Exception("Secret name already added to secrets, please pick a unique one!");
+                }
+
+                WorkingObject.Secrets.Add(secret.Name, secret);
+            }
+
+            return this;
+        }
     }
 }

@@ -23,6 +23,10 @@ namespace ComposeBuilderDotNet.Examples.Complex
             var network2 = Builder.MakeNetwork("my-net2") 
                 .Build();
 
+            var secret1 = Builder.MakeSecret("secret_1")
+                .WithFile("test.txt")
+                .Build();
+
             var mysql = Builder.MakeService("db")
                 .WithImage("mysql:5.7")
                 .WithNetworks(network1)
@@ -33,7 +37,8 @@ namespace ComposeBuilderDotNet.Examples.Complex
                     .WithProperty("MYSQL_USER", dbUser)
                     .WithProperty("MYSQL_PASSWORD", dbPass)
                 )
-                .WithRestartPolicy(ERestartMode.Always)   
+                .WithRestartPolicy(ERestartMode.Always)
+                .WithSecrets(secret1)
                 .WithSwarm()
                 .WithDeploy(d => d
                     .WithMode(EReplicationMode.Replicated)
@@ -56,11 +61,13 @@ namespace ComposeBuilderDotNet.Examples.Complex
                 .WithDeploy(d => d
                     .WithMode(EReplicationMode.Global) 
                 )
+                .WithSecrets(secret1)
                 .Build();
 
             var compose = Builder.MakeCompose()
                 .WithServices(mysql, wordpress)
                 .WithNetworks(network1, network2)
+                .WithSecrets(secret1)
                 .Build();
 
             // serialize our object graph to yaml for writing to a docker-compose file
