@@ -2,33 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <AssemblyName>ComposeBuilderDotNet</AssemblyName>
-    <RootNamespace>ComposeBuilderDotNet</RootNamespace>
     <Authors>David Dolyniuk</Authors>
-    <Company>Edge360</Company>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseUrl></PackageLicenseUrl>
     <Description>The goal of this project is to generate docker-compose literate YAML in C# using the builder design pattern</Description>
-    <PackageId>ComposeBuilderDotNet</PackageId>
-    <Product>ComposeBuilderDotNet</Product>
-    <Copyright>2019</Copyright>
-    <Version>1.0.4</Version>
-    <AssemblyVersion>1.0.4.0</AssemblyVersion>
-    <FileVersion>1.0.4.0</FileVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <LangVersion>7.1</LangVersion>
-    <RepositoryUrl>https://github.com/ddolyniuk1/ComposeBuilderDotNet</RepositoryUrl>
-    <PackageProjectUrl>https://github.com/ddolyniuk1/ComposeBuilderDotNet</PackageProjectUrl>
+    <LangVersion>10.0</LangVersion>
     <PackageTags>Docker Docker-Compose Builder</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="YamlDotNet" Version="8.0.0" />
+    <PackageReference Include="YamlDotNet" Version="11.2.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Properties\" />
-  </ItemGroup>
- 
 </Project>
