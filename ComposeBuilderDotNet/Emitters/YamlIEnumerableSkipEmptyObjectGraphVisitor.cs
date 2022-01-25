@@ -21,10 +21,9 @@ namespace ComposeBuilderDotNet.Emitters
                 return retVal;
             }
 
-            if (typeof(IEnumerable).IsAssignableFrom(value.Value.GetType()))
+            if (value.Value is IEnumerable enumerableObject)
             {
                 // We have a collection
-                var enumerableObject = (IEnumerable) value.Value;
                 if (enumerableObject.GetEnumerator().MoveNext()) // Returns true if the collection is not empty.
                 {
                     // Don't skip this item - serialize it as normal.

@@ -1,12 +1,12 @@
-using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace ComposeBuilderDotNet.Enums
 {
     public enum EReplicationMode
     {
-        [Description("replicated")]
+        [EnumMember(Value="replicated")]
         Replicated,
-        [Description("global")]
+        [EnumMember(Value="global")]
         Global
     }
 }

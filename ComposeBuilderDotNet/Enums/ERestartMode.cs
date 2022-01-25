@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Runtime.Serialization;
 
 namespace ComposeBuilderDotNet.Enums
 {
     public enum ERestartMode
     {
-        [Description("always")]
+        [EnumMember(Value = "always")]
         Always,
-        [Description("no")] 
+
+        [EnumMember(Value = "no")]
         No,
-        [Description("on-failure")]
+
+        [EnumMember(Value = "on-failure")]
         OnFailure,
-        [Description("unless-stopped")]
+
+        [EnumMember(Value = "unless-stopped")]
         UnlessStopped
     }
-
-
 }

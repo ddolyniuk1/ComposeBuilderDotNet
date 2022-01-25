@@ -8,15 +8,17 @@ namespace ComposeBuilderDotNet.Model.Base
     [Serializable]
     public class ObjectBase : Dictionary<string, object>, IObject
     {
-        [YamlIgnore] public string Name { get; set; }
+        [YamlIgnore]
+        public string Name { get; set; }
 
         public T SetProperty<T>(string property, T value)
         {
             if (value is string strValue)
-            { 
+            {
                 this[property] = strValue;
                 return value;
             }
+
             this[property] = value;
             return value;
         }
@@ -37,6 +39,34 @@ namespace ComposeBuilderDotNet.Model.Base
         {
             TryGetProperty<T>(property, out var result);
             return result;
+        }
+
+        public int? GetIntProperty(string property)
+        {
+            if (
+                TryGetProperty<string>(property, out var stringValue)
+                && int.TryParse(stringValue, out var intValue)
+            )
+            {
+                return intValue;
+            }
+
+            return null;
+        }
+
+        public TEnum? GetEnumProperty<TEnum>(string property) where TEnum : struct, Enum
+        {
+            if (
+                TryGetProperty<string>(property, out var stringValue)
+            )
+            {
+                if (Enum.TryParse<TEnum>(stringValue, out var enumValue))
+                {
+                    return enumValue;
+                }
+            }
+
+            return null;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComposeBuilderDotNet.Model;
+using System;
 
 namespace ComposeBuilderDotNet.Builders
 {
@@ -8,7 +9,14 @@ namespace ComposeBuilderDotNet.Builders
         {
             var deployBuilder = new DeployBuilder();
             builderExpression(deployBuilder);
-            return WithMap(deployBuilder.Build()) as SwarmServiceBuilder;
+
+            return WithDeploy(deployBuilder.Build());
+        }
+
+        protected SwarmServiceBuilder WithDeploy(Deploy deploy)
+        {
+            WorkingObject[deploy.Name] = deploy;
+            return this;
         }
     }
 }

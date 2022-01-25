@@ -78,6 +78,25 @@ namespace ComposeBuilderDotNet.Builders
             return this;
         }
 
+        public ServiceBuilder WithHostname(string hostname)
+        {
+            WorkingObject.Hostname = hostname;
+            return this;
+        }
+
+        public ServiceBuilder WithLabels(IDictionary<string, string> labels)
+        {
+            WorkingObject.Labels = labels;
+            return this;
+        }
+
+        public ServiceBuilder WithLabels(Action<MapBuilder> environmentExpression)
+        {
+            var mb = new MapBuilder().WithName("labels");
+            environmentExpression(mb);
+            return WithMap(mb.Build());
+        }
+
         public ServiceBuilder WithImage(string image)
         {
             WorkingObject.Image = image;
@@ -106,31 +125,43 @@ namespace ComposeBuilderDotNet.Builders
             return this;
         }
 
-        public ServiceBuilder WithPortMapping(params string[] mappings)
+        public ServiceBuilder WithPortMappings(params Port[] mappings)
         {
             if (WorkingObject.Ports == null)
             {
-                WorkingObject.Ports = new List<string>();
+                WorkingObject.Ports = new List<Port>();
             }
 
             WorkingObject.Ports.AddRange(mappings);
             return this;
         }
 
-        public ServiceBuilder WithPortMapping(params object[] mappings)
+        public ServiceBuilder WithExtraHosts(params string[] extraHosts)
         {
-            if (WorkingObject.Ports == null)
+            if (WorkingObject.ExtraHosts == null)
             {
-                WorkingObject.Ports = new List<string>();
+                WorkingObject.ExtraHosts = new List<string>();
             }
 
-            WorkingObject.Ports.AddRange(mappings.Select(t => t.ToString()));
+            WorkingObject.ExtraHosts.AddRange(extraHosts);
+            return this;
+        }
+
+        public ServiceBuilder WithCommands(params string[] commands)
+        {
+            if (WorkingObject.Commands == null)
+            {
+                WorkingObject.Commands = new List<string>();
+            }
+
+            WorkingObject.Commands.AddRange(commands);
             return this;
         }
 
         public ServiceBuilder WithRestartPolicy(ERestartMode mode)
         {
-            return WithProperty("restart", mode.GetDescription());
+            WorkingObject.Restart = mode;
+            return this;
         }
 
         public ServiceBuilder WithSecrets(params string[] secrets)
@@ -151,7 +182,7 @@ namespace ComposeBuilderDotNet.Builders
 
         public SwarmServiceBuilder WithSwarm()
         {
-            return new SwarmServiceBuilder {WorkingObject = WorkingObject};
+            return new SwarmServiceBuilder { WorkingObject = WorkingObject };
         }
 
         public ServiceBuilder WithVolumes(params string[] volumes)

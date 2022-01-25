@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComposeBuilderDotNet.Enums;
+using System;
 using System.Collections.Generic;
 using ComposeBuilderDotNet.Model.Base;
 
@@ -19,10 +20,22 @@ namespace ComposeBuilderDotNet.Model
             set => SetProperty("image", value);
         }
 
+        public string Hostname
+        {
+            get => GetProperty<string>("hostname");
+            set => SetProperty("hostname", value);
+        }
+
         public List<string> Networks
         {
             get => GetProperty<List<string>>("networks");
             set => SetProperty("networks", value);
+        }
+
+        public IDictionary<string, string> Labels
+        {
+            get => GetProperty<IDictionary<string, string>>("labels");
+            set => SetProperty("labels", value);
         }
 
         public List<string> Environment
@@ -37,10 +50,27 @@ namespace ComposeBuilderDotNet.Model
             set => SetProperty("volumes", value);
         }
 
-        public List<string> Ports
+        public List<Port> Ports
         {
-            get => GetProperty<List<string>>("ports");
+            get => GetProperty<List<Port>>("ports");
             set => SetProperty("ports", value);
+        }
+
+        public List<string> ExtraHosts
+        {
+            get => GetProperty<List<string>>("extra_hosts");
+            set => SetProperty("extra_hosts", value);
+        }
+
+        public List<string> Commands
+        {
+            get => GetProperty<List<string>>("command");
+            set => SetProperty("command", value);
+        }
+        public ERestartMode? Restart
+        {
+            get => GetEnumProperty<ERestartMode>("restart");
+            set => SetProperty("restart", value);
         }
 
         public List<string> Expose
