@@ -21,7 +21,10 @@ namespace ComposeBuilderDotNet.Emitters
             {
                 if (eventInfo.Source.Type == typeof(string))
                 {
-                    eventInfo.Style = ScalarStyle.DoubleQuoted;
+                    eventInfo = new ScalarEventInfo(eventInfo.Source)
+                    {
+                        Style = ScalarStyle.DoubleQuoted,
+                    };
                 }
             }
 

@@ -38,6 +38,15 @@ namespace ComposeBuilderDotNet.Builders
             return WithDependencies(services.Select(t => t.Name).ToArray());
         }
 
+        public ServiceBuilder WithHealthCheck(Action<HealthCheck> healthCheck)
+        {
+            WorkingObject.HealthCheck ??= new HealthCheck();
+
+            healthCheck(WorkingObject.HealthCheck);
+
+            return this;
+        }
+
         public ServiceBuilder WithEnvironment(params string[] environmentMappings)
         {
             if (WorkingObject.Environment == null)

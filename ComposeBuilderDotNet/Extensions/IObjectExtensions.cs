@@ -12,7 +12,8 @@ namespace ComposeBuilderDotNet.Extensions
             var serializer = new SerializerBuilder()
                 .WithTypeConverter(new YamlStringEnumConverter())
                 .WithNamingConvention(UnderscoredNamingConvention.Instance)
-                //.WithEventEmitter(nextEmitter => new ForceQuotedStringValuesEventEmitter(nextEmitter))
+                .WithEventEmitter(nextEmitter => new FlowStyleStringSequences(nextEmitter))
+                .WithEventEmitter(nextEmitter => new ForceQuotedStringValuesEventEmitter(nextEmitter))
                 .WithEmissionPhaseObjectGraphVisitor(args => new YamlIEnumerableSkipEmptyObjectGraphVisitor(args.InnerVisitor))
                 .Build();
 

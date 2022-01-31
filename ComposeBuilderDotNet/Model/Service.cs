@@ -20,6 +20,12 @@ namespace ComposeBuilderDotNet.Model
             set => SetProperty("image", value);
         }
 
+        public HealthCheck HealthCheck
+        {
+            get => GetProperty<HealthCheck>("healthcheck");
+            set => SetProperty("healthcheck", value);
+        }
+
         public string Hostname
         {
             get => GetProperty<string>("hostname");
@@ -67,6 +73,7 @@ namespace ComposeBuilderDotNet.Model
             get => GetProperty<List<string>>("command");
             set => SetProperty("command", value);
         }
+
         public ERestartMode? Restart
         {
             get => GetEnumProperty<ERestartMode>("restart");
