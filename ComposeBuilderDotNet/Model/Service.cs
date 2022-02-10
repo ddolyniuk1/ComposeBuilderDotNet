@@ -1,95 +1,62 @@
 ﻿using ComposeBuilderDotNet.Enums;
 using System;
 using System.Collections.Generic;
-using ComposeBuilderDotNet.Model.Base;
+using YamlDotNet.Serialization;
 
 namespace ComposeBuilderDotNet.Model
 {
     [Serializable]
-    public class Service : ObjectBase
+    public class Service
     {
-        public string ContainerName
-        {
-            get => GetProperty<string>("container_name");
-            set => SetProperty("container_name", value);
-        }
+        [YamlIgnore]
+        public string Name { get; set; } = null!;
 
-        public string Image
-        {
-            get => GetProperty<string>("image");
-            set => SetProperty("image", value);
-        }
+        [YamlMember(Alias = "container_name")]
+        public string? ContainerName { get; set; }
 
-        public HealthCheck HealthCheck
-        {
-            get => GetProperty<HealthCheck>("healthcheck");
-            set => SetProperty("healthcheck", value);
-        }
+        [YamlMember(Alias = "image")]
+        public string? Image { get; set; }
 
-        public string Hostname
-        {
-            get => GetProperty<string>("hostname");
-            set => SetProperty("hostname", value);
-        }
+        [YamlMember(Alias = "healthcheck")]
+        public HealthCheck? HealthCheck { get; set; }
 
-        public List<string> Networks
-        {
-            get => GetProperty<List<string>>("networks");
-            set => SetProperty("networks", value);
-        }
+        [YamlMember(Alias = "hostname")]
+        public string? Hostname { get; set; }
 
-        public IDictionary<string, string> Labels
-        {
-            get => GetProperty<IDictionary<string, string>>("labels");
-            set => SetProperty("labels", value);
-        }
+        [YamlMember(Alias = "networks")]
+        public List<string>? Networks { get; set; }
 
-        public List<string> Environment
-        {
-            get => GetProperty<List<string>>("environment");
-            set => SetProperty("environment", value);
-        }
+        [YamlMember(Alias = "labels")]
+        public IDictionary<string, string>? Labels { get; set; }
 
-        public List<string> Volumes
-        {
-            get => GetProperty<List<string>>("volumes");
-            set => SetProperty("volumes", value);
-        }
+        [YamlMember(Alias = "environment")]
+        public IDictionary<string, string?>? Environment { get; set; }
 
-        public List<Port> Ports
-        {
-            get => GetProperty<List<Port>>("ports");
-            set => SetProperty("ports", value);
-        }
+        [YamlMember(Alias = "volumes")]
+        public List<string>? Volumes { get; set; }
 
-        public List<string> ExtraHosts
-        {
-            get => GetProperty<List<string>>("extra_hosts");
-            set => SetProperty("extra_hosts", value);
-        }
+        [YamlMember(Alias = "ports")]
+        public List<Port>? Ports { get; set; }
 
-        public List<string> Commands
-        {
-            get => GetProperty<List<string>>("command");
-            set => SetProperty("command", value);
-        }
+        [YamlMember(Alias = "extra_hosts")]
+        public List<string>? ExtraHosts { get; set; }
 
-        public ERestartMode? Restart
-        {
-            get => GetEnumProperty<ERestartMode>("restart");
-            set => SetProperty("restart", value);
-        }
+        [YamlMember(Alias = "command")]
+        public List<string>? Commands { get; set; }
 
-        public List<string> Expose
-        {
-            get => GetProperty<List<string>>("expose");
-            set => SetProperty("expose", value);
-        }
+        [YamlMember(Alias = "restart")]
+        public ERestartMode? Restart { get; set; }
 
-        public List<string> Secrets
-        {
-            get => GetProperty<List<string>>("secrets");
-            set => SetProperty("secrets", value);
-        }
+        [YamlMember(Alias = "expose")]
+        public List<string>? Expose { get; set; }
+
+        [YamlMember(Alias = "secrets")]
+        public List<string>? Secrets { get; set; }
+
+        [YamlMember(Alias = "depends_on")]
+        public List<string>? DependsOn { get; set; }
+
+        [YamlMember(Alias = "deploy")]
+        public Deploy? Deploy { get; set; }
     }
 }

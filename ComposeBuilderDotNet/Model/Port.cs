@@ -1,33 +1,21 @@
-using ComposeBuilderDotNet.Model.Base;
 using System;
+using YamlDotNet.Serialization;
 
 namespace ComposeBuilderDotNet.Model
 {
     [Serializable]
-    public class Port : ObjectBase
+    public class Port
     {
-        public int? Target
-        {
-            get => GetIntProperty("target");
-            set => SetProperty("target", value);
-        }
+        [YamlMember(Alias = "target")]
+        public int? Target { get; set; }
 
-        public int? Published
-        {
-            get => GetIntProperty("published");
-            set => SetProperty("published", value);
-        }
+        [YamlMember(Alias = "published")]
+        public int? Published { get; set; }
 
-        public string Protocol
-        {
-            get => GetProperty<string>("protocol");
-            set => SetProperty("protocol", value);
-        }
+        [YamlMember(Alias = "protocol")]
+        public string? Protocol { get; set; }
 
-        public string Mode
-        {
-            get => GetProperty<string>("mode");
-            set => SetProperty("mode", value);
-        }
+        [YamlMember(Alias = "mode")]
+        public string? Mode { get; set; }
     }
 }

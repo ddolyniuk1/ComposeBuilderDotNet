@@ -5,7 +5,7 @@ using ComposeBuilderDotNet.Model;
 
 namespace ComposeBuilderDotNet.Builders
 {
-    public class ComposeBuilder : BuilderBase<ComposeBuilder, Compose>
+    public class ComposeBuilder : BaseBuilder<ComposeBuilder, Compose>
     {
         public ComposeBuilder WithVersion(string version)
         {

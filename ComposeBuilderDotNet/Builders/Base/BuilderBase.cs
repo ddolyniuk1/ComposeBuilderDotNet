@@ -6,7 +6,7 @@ namespace ComposeBuilderDotNet.Builders.Base
 {
     public abstract class BuilderBase<TBuilderType, TObjectType>
         where TObjectType : ObjectBase, new()
-        where TBuilderType : class
+        where TBuilderType : BuilderBase<TBuilderType, TObjectType>
     {
         protected TObjectType WorkingObject { get; set; } = new TObjectType();
 

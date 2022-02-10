@@ -15,7 +15,7 @@ namespace ComposeBuilderDotNet.Builders
 
         protected SwarmServiceBuilder WithDeploy(Deploy deploy)
         {
-            WorkingObject[deploy.Name] = deploy;
+            WorkingObject.Deploy = deploy;
             return this;
         }
     }

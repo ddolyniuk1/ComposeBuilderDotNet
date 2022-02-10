@@ -6,24 +6,26 @@ using System.Collections.Generic;
 
 namespace ComposeBuilderDotNet.Builders
 {
-    public class DeployBuilder : BuilderBase<DeployBuilder, Deploy>
+    public class DeployBuilder : BaseBuilder<DeployBuilder, Deploy>
     {
         internal DeployBuilder()
         {
-            WithName("deploy");
         }
 
         public DeployBuilder WithLabels(IDictionary<string, string> labels)
         {
-            WorkingObject.Labels = labels;
-            return this;
+            WorkingObject.Labels ??= new Dictionary<string, string>();
+
+            return AddToDictionary(WorkingObject.Labels, labels);
         }
 
-        public DeployBuilder WithLabels(Action<MapBuilder> environmentExpression)
+        public DeployBuilder WithLabels(Action<IDictionary<string, string>> environmentExpression)
         {
-            var mb = new MapBuilder().WithName("labels");
-            environmentExpression(mb);
-            return WithMap(mb.Build());
+            WorkingObject.Labels ??= new Dictionary<string, string>();
+
+            environmentExpression(WorkingObject.Labels);
+
+            return this;
         }
 
         public DeployBuilder WithMode(EReplicationMode mode)
@@ -37,29 +39,37 @@ namespace ComposeBuilderDotNet.Builders
             WorkingObject.Replicas = replicas;
             return this;
         }
+
         public DeployBuilder WithUpdateConfig(Action<MapBuilder> updateConfig)
         {
             var mb = new MapBuilder().WithName("update_config");
             updateConfig(mb);
-            return WithMap(mb.Build());
+            WorkingObject.UpdateConfig = mb.Build();
+            return this;
         }
+
         public DeployBuilder WithRestartPolicy(Action<MapBuilder> restartPolicy)
         {
             var mb = new MapBuilder().WithName("restart_policy");
             restartPolicy(mb);
-            return WithMap(mb.Build());
+            WorkingObject.RestartPolicy = mb.Build();
+            return this;
         }
+
         public DeployBuilder WithPlacement(Action<MapBuilder> placement)
         {
             var mb = new MapBuilder().WithName("placement");
             placement(mb);
-            return WithMap(mb.Build());
+            WorkingObject.Placement = mb.Build();
+            return this;
         }
+
         public DeployBuilder WithResources(Action<MapBuilder> resources)
         {
             var mb = new MapBuilder().WithName("resources");
             resources(mb);
-            return WithMap(mb.Build());
+            WorkingObject.Resources = mb.Build();
+            return this;
         }
     }
 }

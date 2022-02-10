@@ -1,40 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using ComposeBuilderDotNet.Model.Base;
+using YamlDotNet.Serialization;
 
 namespace ComposeBuilderDotNet.Model
 {
     [Serializable]
-    public class Compose : ObjectBase
+    public class Compose
     {
-        public string Version
-        {
-            get => GetProperty<string>("version");
-            set => SetProperty("version", value);
-        }
+        [YamlMember(Alias = "version")]
+        public string? Version { get; set; }
 
-        public Dictionary<string, Service> Services
-        {
-            get => GetProperty<Dictionary<string, Service>>("services");
-            set => SetProperty("services", value);
-        }
+        [YamlMember(Alias = "services")]
+        public Dictionary<string, Service>? Services { get; set; }
 
-        public Dictionary<string, Network> Networks
-        {
-            get => GetProperty<Dictionary<string, Network>>("networks");
-            set => SetProperty("networks", value);
-        }
-         
-        public Dictionary<string, Secret> Secrets
-        {
-            get => GetProperty<Dictionary<string, Secret>>("secrets");
-            set => SetProperty("secrets", value);
-        }
+        [YamlMember(Alias = "networks")]
+        public Dictionary<string, Network>? Networks { get; set; }
 
-        public Dictionary<string, Volume> Volumes
-        {
-            get => GetProperty<Dictionary<string, Volume>>("volumes");
-            set => SetProperty("volumes", value);
-        }
+        [YamlMember(Alias = "secrets")]
+        public Dictionary<string, Secret>? Secrets { get; set; }
+
+        [YamlMember(Alias = "volumes")]
+        public Dictionary<string, Volume>? Volumes { get; set; }
     }
 }

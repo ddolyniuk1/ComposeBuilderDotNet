@@ -8,7 +8,7 @@ namespace ComposeBuilderDotNet.Model
     public class HealthCheck
     {
         [YamlMember(Alias = "test", ScalarStyle = ScalarStyle.Folded)]
-        public string[] TestCommand { get; set; }
+        public string[] TestCommand { get; set; } = null!;
 
         [YamlMember(Alias = "interval")]
         public string? Interval { get; set; }

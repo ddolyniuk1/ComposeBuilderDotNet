@@ -1,29 +1,32 @@
 using ComposeBuilderDotNet.Enums;
-using ComposeBuilderDotNet.Model.Base;
 using System;
 using System.Collections.Generic;
+using YamlDotNet.Serialization;
 
 namespace ComposeBuilderDotNet.Model
 {
     [Serializable]
-    public class Deploy : ObjectBase
+    public class Deploy
     {
-        public IDictionary<string, string> Labels
-        {
-            get => GetProperty<IDictionary<string, string>>("labels");
-            set => SetProperty("labels", value);
-        }
+        [YamlMember(Alias = "labels")]
+        public IDictionary<string, string>? Labels { get; set; }
 
-        public EReplicationMode? Mode
-        {
-            get => GetEnumProperty<EReplicationMode>("mode");
-            set => SetProperty("mode", value);
-        }
+        [YamlMember(Alias = "mode")]
+        public EReplicationMode? Mode { get; set; }
 
-        public int? Replicas
-        {
-            get => GetIntProperty("replicas");
-            set => SetProperty("replicas", value);
-        }
+        [YamlMember(Alias = "replicas")]
+        public int? Replicas { get; set; }
+
+        [YamlMember(Alias = "update_config")]
+        public Map? UpdateConfig { get; set; }
+
+        [YamlMember(Alias = "restart_policy")]
+        public Map? RestartPolicy { get; set; }
+
+        [YamlMember(Alias = "placement")]
+        public Map? Placement { get; set; }
+
+        [YamlMember(Alias = "resources")]
+        public Map? Resources { get; set; }
     }
 }

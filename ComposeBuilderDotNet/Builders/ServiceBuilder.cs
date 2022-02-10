@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using ComposeBuilderDotNet.Builders.Base;
 using ComposeBuilderDotNet.Enums;
-using ComposeBuilderDotNet.Extensions;
 using ComposeBuilderDotNet.Model;
 
 namespace ComposeBuilderDotNet.Builders
 {
-    public class ServiceBuilder : BuilderBase<ServiceBuilder, Service>
+    public class ServiceBuilder : BaseBuilder<ServiceBuilder, Service>
     {
         internal ServiceBuilder()
         {
+        }
+
+        public ServiceBuilder WithName(string name)
+        {
+            WorkingObject.Name = name;
+
+            return this;
         }
 
         public ServiceBuilder WithContainerName(string containerName)
@@ -22,12 +28,9 @@ namespace ComposeBuilderDotNet.Builders
 
         public ServiceBuilder WithDependencies(params string[] services)
         {
-            if (!WorkingObject.ContainsKey("depends_on"))
-            {
-                WorkingObject["depends_on"] = new List<string>();
-            }
+            WorkingObject.DependsOn ??= new List<string>();
 
-            var dependsOnList = WorkingObject["depends_on"] as List<string>;
+            var dependsOnList = WorkingObject.DependsOn as List<string>;
 
             dependsOnList?.AddRange(services);
             return this;
@@ -47,22 +50,20 @@ namespace ComposeBuilderDotNet.Builders
             return this;
         }
 
-        public ServiceBuilder WithEnvironment(params string[] environmentMappings)
+        public ServiceBuilder WithEnvironment(IDictionary<string, string?> environmentMappings)
         {
-            if (WorkingObject.Environment == null)
-            {
-                WorkingObject.Environment = new List<string>();
-            }
+            WorkingObject.Environment ??= new Dictionary<string, string>();
 
-            WorkingObject.Environment.AddRange(environmentMappings);
-            return this;
+            return AddToDictionary(WorkingObject.Environment, environmentMappings);
         }
 
-        public ServiceBuilder WithEnvironment(Action<MapBuilder> environmentExpression)
+        public ServiceBuilder WithEnvironment(Action<IDictionary<string, string?>> environmentExpression)
         {
-            var mb = new MapBuilder().WithName("environment");
-            environmentExpression(mb);
-            return WithMap(mb.Build());
+            WorkingObject.Environment ??= new Dictionary<string, string?>();
+
+            environmentExpression(WorkingObject.Environment);
+
+            return this;
         }
 
         public ServiceBuilder WithExposed(params string[] exposed)
@@ -95,15 +96,18 @@ namespace ComposeBuilderDotNet.Builders
 
         public ServiceBuilder WithLabels(IDictionary<string, string> labels)
         {
-            WorkingObject.Labels = labels;
-            return this;
+            WorkingObject.Labels ??= new Dictionary<string, string>();
+
+            return AddToDictionary(WorkingObject.Labels, labels);
         }
 
-        public ServiceBuilder WithLabels(Action<MapBuilder> environmentExpression)
+        public ServiceBuilder WithLabels(Action<IDictionary<string, string>> environmentExpression)
         {
-            var mb = new MapBuilder().WithName("labels");
-            environmentExpression(mb);
-            return WithMap(mb.Build());
+            WorkingObject.Labels ??= new Dictionary<string, string>();
+
+            environmentExpression(WorkingObject.Labels);
+
+            return this;
         }
 
         public ServiceBuilder WithImage(string image)
