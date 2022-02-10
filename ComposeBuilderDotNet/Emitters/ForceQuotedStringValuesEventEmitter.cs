@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.EventEmitters;
@@ -12,20 +13,20 @@ namespace ComposeBuilderDotNet.Emitters
         public ForceQuotedStringValuesEventEmitter(IEventEmitter nextEmitter)
             : base(nextEmitter)
         {
-            _state.Push(new EmitterState(1));
+            _state.Push(new EmitterState(EmitterState.EventType.Root));
         }
 
         public override void Emit(ScalarEventInfo eventInfo, IEmitter emitter)
         {
-            if (_state.Peek().VisitNext())
+            var item = _state.Peek();
+            item.Move();
+
+            if (item.ShouldApply() && eventInfo.Source.Type == typeof(string))
             {
-                if (eventInfo.Source.Type == typeof(string))
+                eventInfo = new ScalarEventInfo(eventInfo.Source)
                 {
-                    eventInfo = new ScalarEventInfo(eventInfo.Source)
-                    {
-                        Style = ScalarStyle.DoubleQuoted,
-                    };
-                }
+                    Style = ScalarStyle.DoubleQuoted,
+                };
             }
 
             base.Emit(eventInfo, emitter);
@@ -33,44 +34,68 @@ namespace ComposeBuilderDotNet.Emitters
 
         public override void Emit(MappingStartEventInfo eventInfo, IEmitter emitter)
         {
-            _state.Peek().VisitNext();
-            _state.Push(new EmitterState(2));
+            _state.Peek().Move();
+            _state.Push(new EmitterState(EmitterState.EventType.Mapping));
             base.Emit(eventInfo, emitter);
         }
 
         public override void Emit(MappingEndEventInfo eventInfo, IEmitter emitter)
         {
-            _state.Pop();
+            var item = _state.Pop();
+            if (item.Type != EmitterState.EventType.Mapping)
+            {
+                throw new Exception();
+            }
+
             base.Emit(eventInfo, emitter);
         }
 
         public override void Emit(SequenceStartEventInfo eventInfo, IEmitter emitter)
         {
-            _state.Peek().VisitNext();
-            _state.Push(new EmitterState(1));
+            _state.Peek().Move();
+            _state.Push(new EmitterState(EmitterState.EventType.Sequence));
             base.Emit(eventInfo, emitter);
         }
 
         public override void Emit(SequenceEndEventInfo eventInfo, IEmitter emitter)
         {
-            _state.Pop();
+            var item = _state.Pop();
+            if (item.Type != EmitterState.EventType.Sequence)
+            {
+                throw new Exception();
+            }
+
             base.Emit(eventInfo, emitter);
         }
 
         private class EmitterState
         {
-            private readonly int _valuePeriod;
+            public EventType Type { get; }
+
             private int _currentIndex;
 
-            public EmitterState(int valuePeriod)
+            public EmitterState(EventType eventType)
             {
-                _valuePeriod = valuePeriod;
+                Type = eventType;
             }
 
-            public bool VisitNext()
+            public void Move()
             {
-                ++_currentIndex;
-                return _currentIndex % _valuePeriod == 0;
+                _currentIndex++;
+            }
+
+            public bool ShouldApply() => Type switch
+            {
+                EventType.Mapping => _currentIndex % 2 == 0,
+                EventType.Sequence => true,
+                _ => false,
+            };
+
+            public enum EventType : byte
+            {
+                Root,
+                Mapping,
+                Sequence,
             }
         }
     }
