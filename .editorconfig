@@ -1,0 +1,40 @@
+﻿root = true
+
+[*]
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[{*.csproj, *.targets}]
+charset = utf-8
+indent_style = space
+indent_size = 2
+
+[*.cs]
+charset = utf-8
+indent_style = space
+indent_size = 4
+
+csharp_space_after_cast = true
+dotnet_sort_system_directives_first = false
+dotnet_separate_import_directive_groups = false
+dotnet_style_namespace_match_folder = true
+
+dotnet_diagnostic.CA1507.severity = error
+
+dotnet_diagnostic.CA2000.severity = error
+dotnet_diagnostic.CA2012.severity = error
+dotnet_diagnostic.CA2016.severity = error
+
+dotnet_diagnostic.CA2213.severity = error
+dotnet_diagnostic.CA2215.severity = error
+dotnet_diagnostic.CA2217.severity = error
+dotnet_diagnostic.CA2234.severity = error
+
+dotnet_diagnostic.CA5350.severity = error
+dotnet_diagnostic.CA5351.severity = error
+dotnet_diagnostic.CA5358.severity = error
+dotnet_diagnostic.CA5359.severity = error
+dotnet_diagnostic.CA5364.severity = error
+dotnet_diagnostic.CA5384.severity = error
+dotnet_diagnostic.CA5394.severity = error
