@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComposeBuilderDotNet.Examples.Complex", "ComposeBuilderDotNet.Examples.Complex\ComposeBuilderDotNet.Examples.Complex.csproj", "{84DF14CD-3329-45CF-AED3-6C386A9BB34F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aviationexam.DockerComposeBuilder.Examples.Complex", "Aviationexam.DockerComposeBuilder.Examples.Complex\Aviationexam.DockerComposeBuilder.Examples.Complex.csproj", "{84DF14CD-3329-45CF-AED3-6C386A9BB34F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComposeBuilderDotNet", "ComposeBuilderDotNet\ComposeBuilderDotNet.csproj", "{D321FE6E-BC0A-49FF-9175-4D101ED0F266}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aviationexam.DockerComposeBuilder", "Aviationexam.DockerComposeBuilder\Aviationexam.DockerComposeBuilder.csproj", "{D321FE6E-BC0A-49FF-9175-4D101ED0F266}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_SolutionItems", "{675557DF-30D8-45ED-97F1-F5210C0F4E9A}"
 	ProjectSection(SolutionItems) = preProject
