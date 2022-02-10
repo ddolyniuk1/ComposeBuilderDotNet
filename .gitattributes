@@ -1,0 +1,3 @@
+* text=auto
+*.cs text=cs eol=lf
+*.csproj text=csproj eol=lf
