@@ -1,4 +1,4 @@
-﻿namespace Aviationexam.DockerComposeBuilder.Interfaces
+namespace Aviationexam.DockerComposeBuilder.Interfaces
 {
     public interface IObject
     {

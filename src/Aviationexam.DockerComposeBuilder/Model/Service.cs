@@ -1,4 +1,4 @@
-﻿using Aviationexam.DockerComposeBuilder.Enums;
+using Aviationexam.DockerComposeBuilder.Enums;
 using System;
 using System.Collections.Generic;
 using YamlDotNet.Serialization;

@@ -1,4 +1,4 @@
-﻿using Aviationexam.DockerComposeBuilder.Builders;
+using Aviationexam.DockerComposeBuilder.Builders;
 using Aviationexam.DockerComposeBuilder.Enums;
 using Aviationexam.DockerComposeBuilder.Extensions;
 using Aviationexam.DockerComposeBuilder.Model;

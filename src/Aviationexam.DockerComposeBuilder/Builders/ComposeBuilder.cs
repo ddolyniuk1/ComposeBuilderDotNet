@@ -1,4 +1,4 @@
-﻿using Aviationexam.DockerComposeBuilder.Builders.Base;
+using Aviationexam.DockerComposeBuilder.Builders.Base;
 using Aviationexam.DockerComposeBuilder.Model;
 using System;
 using System.Collections.Generic;

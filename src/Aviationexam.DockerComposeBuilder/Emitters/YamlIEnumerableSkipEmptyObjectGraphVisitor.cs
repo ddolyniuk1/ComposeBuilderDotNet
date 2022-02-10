@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.ObjectGraphVisitors;

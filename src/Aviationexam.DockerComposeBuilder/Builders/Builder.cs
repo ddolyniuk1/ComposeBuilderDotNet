@@ -1,4 +1,4 @@
-﻿namespace Aviationexam.DockerComposeBuilder.Builders
+namespace Aviationexam.DockerComposeBuilder.Builders
 {
     public class Builder
     {

@@ -1,4 +1,4 @@
-﻿using Aviationexam.DockerComposeBuilder.Interfaces;
+using Aviationexam.DockerComposeBuilder.Interfaces;
 using System;
 using System.Collections.Generic;
 using YamlDotNet.Serialization;

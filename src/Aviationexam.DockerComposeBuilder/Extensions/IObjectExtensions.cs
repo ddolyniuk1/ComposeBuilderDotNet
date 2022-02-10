@@ -1,4 +1,4 @@
-﻿using Aviationexam.DockerComposeBuilder.Emitters;
+using Aviationexam.DockerComposeBuilder.Emitters;
 using Aviationexam.DockerComposeBuilder.Model;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
