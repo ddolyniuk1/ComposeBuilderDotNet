@@ -12,6 +12,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_Solution
 		..\.gitattributes = ..\.gitattributes
 		..\.config\dotnet-tools.json = ..\.config\dotnet-tools.json
 		..\.editorconfig = ..\.editorconfig
+		..\.github\dependabot.yml = ..\.github\dependabot.yml
 	EndProjectSection
 EndProject
 Global
