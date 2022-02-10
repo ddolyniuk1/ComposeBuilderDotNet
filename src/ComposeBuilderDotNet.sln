@@ -9,9 +9,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComposeBuilderDotNet", "Com
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_SolutionItems", "{675557DF-30D8-45ED-97F1-F5210C0F4E9A}"
 	ProjectSection(SolutionItems) = preProject
-		.config\dotnet-tools.json = .config\dotnet-tools.json
-		.editorconfig = .editorconfig
-		.gitattributes = .gitattributes
+		..\.gitattributes = ..\.gitattributes
+		..\.config\dotnet-tools.json = ..\.config\dotnet-tools.json
+		..\.editorconfig = ..\.editorconfig
 	EndProjectSection
 EndProject
 Global
