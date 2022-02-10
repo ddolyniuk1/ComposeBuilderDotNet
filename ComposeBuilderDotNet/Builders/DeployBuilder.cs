@@ -42,7 +42,7 @@ namespace ComposeBuilderDotNet.Builders
 
         public DeployBuilder WithUpdateConfig(Action<MapBuilder> updateConfig)
         {
-            var mb = new MapBuilder().WithName("update_config");
+            var mb = new MapBuilder();
             updateConfig(mb);
             WorkingObject.UpdateConfig = mb.Build();
             return this;
@@ -50,7 +50,7 @@ namespace ComposeBuilderDotNet.Builders
 
         public DeployBuilder WithRestartPolicy(Action<MapBuilder> restartPolicy)
         {
-            var mb = new MapBuilder().WithName("restart_policy");
+            var mb = new MapBuilder();
             restartPolicy(mb);
             WorkingObject.RestartPolicy = mb.Build();
             return this;
@@ -58,7 +58,7 @@ namespace ComposeBuilderDotNet.Builders
 
         public DeployBuilder WithPlacement(Action<MapBuilder> placement)
         {
-            var mb = new MapBuilder().WithName("placement");
+            var mb = new MapBuilder();
             placement(mb);
             WorkingObject.Placement = mb.Build();
             return this;
@@ -66,7 +66,7 @@ namespace ComposeBuilderDotNet.Builders
 
         public DeployBuilder WithResources(Action<MapBuilder> resources)
         {
-            var mb = new MapBuilder().WithName("resources");
+            var mb = new MapBuilder();
             resources(mb);
             WorkingObject.Resources = mb.Build();
             return this;
