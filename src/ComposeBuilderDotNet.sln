@@ -15,6 +15,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_Solution
 		..\.github\dependabot.yml = ..\.github\dependabot.yml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github Workflows", "Github Workflows", "{6890256C-8368-44DD-BEFD-AA91A526CCEC}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\build.yml = ..\.github\workflows\build.yml
+		..\.github\workflows\nightly-release.yml = ..\.github\workflows\nightly-release.yml
+		..\.github\workflows\pr-build.yml = ..\.github\workflows\pr-build.yml
+		..\.github\workflows\release.yml = ..\.github\workflows\release.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,5 +43,8 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {63988F8F-4363-4FE1-9313-38C355447B7A}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6890256C-8368-44DD-BEFD-AA91A526CCEC} = {675557DF-30D8-45ED-97F1-F5210C0F4E9A}
 	EndGlobalSection
 EndGlobal
