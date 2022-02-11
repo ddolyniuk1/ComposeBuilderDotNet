@@ -7,7 +7,6 @@
     <IncludeSymbols>true</IncludeSymbols>
     <IsPackable>true</IsPackable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/aviationexam/docker-compose-builder</PackageProjectUrl>
     <RepositoryUrl>https://github.com/aviationexam/docker-compose-builder</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -23,7 +22,6 @@
 
   <ItemGroup>
     <Content Include="..\..\README.md" Link="README.md" Pack="true" PackagePath="README.md" />
-    <None Include="..\..\LICENSE.md" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
 
 </Project>
