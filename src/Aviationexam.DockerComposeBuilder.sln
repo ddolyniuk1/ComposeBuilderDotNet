@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SolutionItems", "_Solution
 		..\.config\dotnet-tools.json = ..\.config\dotnet-tools.json
 		..\.editorconfig = ..\.editorconfig
 		..\.github\dependabot.yml = ..\.github\dependabot.yml
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github Workflows", "Github Workflows", "{6890256C-8368-44DD-BEFD-AA91A526CCEC}"
