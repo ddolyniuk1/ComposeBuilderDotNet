@@ -1,6 +1,6 @@
 [![Build Status](https://github.com/aviationexam/docker-compose-builder/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/aviationexam/docker-compose-builder/actions/workflows/build.yml)
-[![NuGet](https://img.shields.io/nuget/v/Aviationexam.DockerComposeBuilder.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/Aviationexam.DockerComposeBuilder/)
-[![MyGet](https://img.shields.io/myget/docker-compose-builder/vpre/Aviationexam.DockerComposeBuilder?label=MyGet)](https://www.myget.org/feed/docker-compose-builder/package/nuget/Aviationexam.DockerComposeBuilder)
+[![NuGet](https://img.shields.io/nuget/v/DockerComposeBuilder.svg?style=flat-square&label=nuget)](https://www.nuget.org/packages/DockerComposeBuilder/)
+[![MyGet](https://img.shields.io/myget/docker-compose-builder/vpre/DockerComposeBuilder?label=MyGet)](https://www.myget.org/feed/docker-compose-builder/package/nuget/DockerComposeBuilder)
 
 # DockerComposeBuilder
 
