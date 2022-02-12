@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github Workflows", "Github 
 		..\.github\workflows\release.yml = ..\.github\workflows\release.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aviationexam.DockerComposeBuilder.Tests", "Aviationexam.DockerComposeBuilder.Tests\Aviationexam.DockerComposeBuilder.Tests.csproj", "{21DA6121-85C1-42F1-9E7C-522571504727}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{D321FE6E-BC0A-49FF-9175-4D101ED0F266}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D321FE6E-BC0A-49FF-9175-4D101ED0F266}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D321FE6E-BC0A-49FF-9175-4D101ED0F266}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21DA6121-85C1-42F1-9E7C-522571504727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21DA6121-85C1-42F1-9E7C-522571504727}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21DA6121-85C1-42F1-9E7C-522571504727}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21DA6121-85C1-42F1-9E7C-522571504727}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
