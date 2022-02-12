@@ -1,4 +1,4 @@
-using Aviationexam.DockerComposeBuilder.Model;
+using Aviationexam.DockerComposeBuilder.Model.Services;
 using System;
 
 namespace Aviationexam.DockerComposeBuilder.Builders

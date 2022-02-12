@@ -1,6 +1,6 @@
 using Aviationexam.DockerComposeBuilder.Builders.Base;
 using Aviationexam.DockerComposeBuilder.Enums;
-using Aviationexam.DockerComposeBuilder.Model;
+using Aviationexam.DockerComposeBuilder.Model.Services;
 using System;
 using System.Collections.Generic;
 

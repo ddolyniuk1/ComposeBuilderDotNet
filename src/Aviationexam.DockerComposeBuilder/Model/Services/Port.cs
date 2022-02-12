@@ -1,7 +1,7 @@
 using System;
 using YamlDotNet.Serialization;
 
-namespace Aviationexam.DockerComposeBuilder.Model
+namespace Aviationexam.DockerComposeBuilder.Model.Services
 {
     [Serializable]
     public class Port
