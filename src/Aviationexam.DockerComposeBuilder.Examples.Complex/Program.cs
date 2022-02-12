@@ -1,7 +1,7 @@
 using Aviationexam.DockerComposeBuilder.Builders;
 using Aviationexam.DockerComposeBuilder.Enums;
 using Aviationexam.DockerComposeBuilder.Extensions;
-using Aviationexam.DockerComposeBuilder.Model;
+using Aviationexam.DockerComposeBuilder.Model.Services;
 using System;
 
 var dbUser = "root";
