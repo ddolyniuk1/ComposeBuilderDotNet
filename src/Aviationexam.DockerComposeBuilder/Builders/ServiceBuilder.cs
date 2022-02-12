@@ -1,6 +1,8 @@
 using Aviationexam.DockerComposeBuilder.Builders.Base;
+using Aviationexam.DockerComposeBuilder.Builders.Services;
 using Aviationexam.DockerComposeBuilder.Enums;
 using Aviationexam.DockerComposeBuilder.Model;
+using Aviationexam.DockerComposeBuilder.Model.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,8 @@ namespace Aviationexam.DockerComposeBuilder.Builders
 {
     public class ServiceBuilder : BaseBuilder<ServiceBuilder, Service>
     {
+        protected BuildBuilder? _buildBuilder;
+
         internal ServiceBuilder()
         {
         }
@@ -110,6 +114,15 @@ namespace Aviationexam.DockerComposeBuilder.Builders
             return this;
         }
 
+        public ServiceBuilder WithBuild(Action<BuildBuilder> build)
+        {
+            _buildBuilder ??= new BuildBuilder();
+
+            build(_buildBuilder);
+
+            return this;
+        }
+
         public ServiceBuilder WithImage(string image)
         {
             WorkingObject.Image = image;
@@ -207,6 +220,16 @@ namespace Aviationexam.DockerComposeBuilder.Builders
 
             WorkingObject.Volumes.AddRange(volumes);
             return this;
+        }
+
+        public override Service Build()
+        {
+            if (_buildBuilder != null)
+            {
+                WorkingObject.Build = _buildBuilder.Build();
+            }
+
+            return base.Build();
         }
     }
 }

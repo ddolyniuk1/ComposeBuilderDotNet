@@ -1,4 +1,5 @@
 using Aviationexam.DockerComposeBuilder.Enums;
+using Aviationexam.DockerComposeBuilder.Model.Services;
 using System;
 using System.Collections.Generic;
 using YamlDotNet.Serialization;
@@ -16,6 +17,9 @@ namespace Aviationexam.DockerComposeBuilder.Model
 
         [YamlMember(Alias = "image")]
         public string? Image { get; set; }
+
+        [YamlMember(Alias = "build")]
+        public ServiceBuild? Build { get; set; }
 
         [YamlMember(Alias = "healthcheck")]
         public HealthCheck? HealthCheck { get; set; }
