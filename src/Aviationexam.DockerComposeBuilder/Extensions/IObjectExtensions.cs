@@ -10,7 +10,7 @@ namespace Aviationexam.DockerComposeBuilder.Extensions
         public static string Serialize(this Compose serializable)
         {
             var serializer = new SerializerBuilder()
-                // .WithTypeConverter(new YamlStringEnumConverter())
+                .WithTypeConverter(new YamlValueCollectionConverter())
                 .WithNamingConvention(UnderscoredNamingConvention.Instance)
                 .WithEventEmitter(nextEmitter => new FlowStyleStringSequences(nextEmitter))
                 .WithEventEmitter(nextEmitter => new FlowStringEnumConverter(nextEmitter))
