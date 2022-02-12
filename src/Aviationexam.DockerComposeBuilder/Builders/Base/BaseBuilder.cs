@@ -6,7 +6,7 @@ namespace Aviationexam.DockerComposeBuilder.Builders.Base
         where TObjectType : class, new()
         where TBuilderType : BaseBuilder<TBuilderType, TObjectType>
     {
-        protected TObjectType WorkingObject { get; set; } = new TObjectType();
+        protected TObjectType WorkingObject { get; set; } = new();
 
         protected TBuilderType AddToDictionary<T>(IDictionary<string, T> original, IDictionary<string, T> source)
         {
@@ -18,7 +18,7 @@ namespace Aviationexam.DockerComposeBuilder.Builders.Base
             return (TBuilderType) this;
         }
 
-        public TObjectType Build()
+        public virtual TObjectType Build()
         {
             return WorkingObject;
         }

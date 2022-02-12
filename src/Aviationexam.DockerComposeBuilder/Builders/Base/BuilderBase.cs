@@ -8,19 +8,19 @@ namespace Aviationexam.DockerComposeBuilder.Builders.Base
         where TObjectType : ObjectBase, new()
         where TBuilderType : BuilderBase<TBuilderType, TObjectType>
     {
-        protected TObjectType WorkingObject { get; set; } = new TObjectType();
+        protected TObjectType WorkingObject { get; set; } = new();
 
 
         public TBuilderType WithName(string name)
         {
             WorkingObject.Name = name;
-            return this as TBuilderType;
+            return (TBuilderType) this;
         }
 
         public TBuilderType WithProperty(string property, object value)
         {
             WorkingObject[property] = value;
-            return this as TBuilderType;
+            return (TBuilderType) this;
         }
 
         public TBuilderType WithMap(string mapName, Action<MapBuilder> mapConfigureExpression)
@@ -28,13 +28,13 @@ namespace Aviationexam.DockerComposeBuilder.Builders.Base
             var mb = new MapBuilder().WithName(mapName);
             mapConfigureExpression(mb);
             WorkingObject[mapName] = mb.Build();
-            return this as TBuilderType;
+            return (TBuilderType) this;
         }
 
         public TBuilderType WithMap(Map map)
         {
             WorkingObject[map.Name] = map;
-            return this as TBuilderType;
+            return (TBuilderType) this;
         }
 
         public TObjectType Build()
