@@ -17,7 +17,7 @@ public class ComposeBuilderTests
         var result = compose.Serialize();
 
         Assert.Equal(
-            @"version: ""3.7""
+            @"version: ""3.8""
 ", result
         );
     }
@@ -35,7 +35,7 @@ public class ComposeBuilderTests
         var result = compose.Serialize();
 
         Assert.Equal(
-            @"version: ""3.7""
+            @"version: ""3.8""
 services:
   a-service:
     image: ""aviationexam/a-service""
@@ -58,7 +58,7 @@ services:
         var result = compose.Serialize();
 
         Assert.Equal(
-            @"version: ""3.7""
+            @"version: ""3.8""
 services:
   a-service:
     image: ""aviationexam/a-service""
@@ -89,7 +89,7 @@ services:
         var result = compose.Serialize();
 
         Assert.Equal(
-            @"version: ""3.7""
+            @"version: ""3.8""
 services:
   a-service:
     image: ""aviationexam/a-service""

@@ -11,7 +11,7 @@ namespace Aviationexam.DockerComposeBuilder.Builders
 {
     public class ServiceBuilder : BaseBuilder<ServiceBuilder, Service>
     {
-        protected BuildBuilder? _buildBuilder;
+        protected BuildBuilder? BuildBuilder;
 
         internal ServiceBuilder()
         {
@@ -116,9 +116,9 @@ namespace Aviationexam.DockerComposeBuilder.Builders
 
         public ServiceBuilder WithBuild(Action<BuildBuilder> build)
         {
-            _buildBuilder ??= new BuildBuilder();
+            BuildBuilder ??= new BuildBuilder();
 
-            build(_buildBuilder);
+            build(BuildBuilder);
 
             return this;
         }
@@ -224,9 +224,9 @@ namespace Aviationexam.DockerComposeBuilder.Builders
 
         public override Service Build()
         {
-            if (_buildBuilder != null)
+            if (BuildBuilder != null)
             {
-                WorkingObject.Build = _buildBuilder.Build();
+                WorkingObject.Build = BuildBuilder.Build();
             }
 
             return base.Build();
