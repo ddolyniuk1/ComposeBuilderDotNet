@@ -17,7 +17,7 @@ jobs:
         uses: actions/setup-dotnet@v2
         with:
           dotnet-version: '6.0.x'
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Retore
         run: dotnet restore --nologo src
       - name: Build
@@ -28,7 +28,7 @@ jobs:
     env:
       DOTNET_CLI_TELEMETRY_OPTOUT: 'true'
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup .Net 6.0.x
         uses: actions/setup-dotnet@v2
         with:
