@@ -33,7 +33,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore --nologo "-p:Version=${{ steps.gitversion.outputs.MajorMinorPatch }}" src
       - name: Pack with .Net
         run: dotnet pack --nologo --no-build --configuration Release --output nuget-packages -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} src
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: Nuget-packages-${{ steps.gitversion.outputs.nuGetVersionV2 }}
           path: nuget-packages
