@@ -27,17 +27,17 @@ jobs:
         uses: gittools/actions/gitversion/execute@v0.9.13
       - run: |
           echo "MajorMinorPatch: ${{ steps.gitversion.outputs.MajorMinorPatch }}"
-          echo "NuGetVersionV2: ${{ steps.gitversion.outputs.nuGetVersionV2 }}"
+          echo "NuGetVersionV2: ${{ steps.gitversion.outputs.NuGetVersionV2 }}"
           echo "CommitsSinceVersionSourcePadded: ${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}"
       - name: Restore with .Net
         run: dotnet restore --nologo src
       - name: Build with .Net
-        run: dotnet build --configuration Release --no-restore --nologo "-p:Version=${{ steps.gitversion.outputs.MajorMinorPatch }}" src
+        run: dotnet build --configuration Release --no-restore --nologo "-p:Version=${{ steps.gitversion.outputs.NuGetVersionV2 }}" src
       - name: Pack with .Net
-        run: dotnet pack --nologo --no-build --configuration Release --output nuget-packages -p:PackageVersion=${{ steps.gitversion.outputs.MajorMinorPatch }}.${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}-nightly src
+        run: dotnet pack --nologo --no-build --configuration Release --output nuget-packages -p:PackageVersion=${{ steps.gitversion.outputs.NuGetVersionV2 }} src
       - uses: actions/upload-artifact@v3
         with:
-          name: Nuget-packages-${{ steps.gitversion.outputs.MajorMinorPatch }}.${{ steps.gitversion.outputs.CommitsSinceVersionSourcePadded }}-nightly
+          name: Nuget-packages-${{ steps.gitversion.outputs.NuGetVersionV2 }}
           path: nuget-packages
       - name: Push package to Myget
         run: dotnet nuget push 'nuget-packages/*.nupkg' --api-key ${{ secrets.MYGET_API_KEY }} --source https://www.myget.org/F/docker-compose-builder/api/v3/index.json
