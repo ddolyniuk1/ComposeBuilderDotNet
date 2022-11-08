@@ -23,7 +23,7 @@ jobs:
           dotnet-version: '7.0.x'
           dotnet-quality: 'preview'
       - uses: actions/checkout@v3
-      - name: Retore
+      - name: Restore
         run: dotnet restore --nologo src
       - name: Build
         run: dotnet build --no-restore --nologo --configuration Release src
@@ -45,7 +45,7 @@ jobs:
         with:
           dotnet-version: '7.0.x'
           dotnet-quality: 'preview'
-      - name: Retore
+      - name: Restore
         run: dotnet restore --nologo src
       - name: .Net Format
         run: dotnet format --no-restore --verify-no-changes -v diag src
