@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net6.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net6.0;net7.0</TargetFrameworks>
     <Authors>David Dolyniuk, Jan Trejbal</Authors>
     <Description>The goal of this project is to generate docker-compose literate YAML in C# using the builder design pattern</Description>
     <IncludeSymbols>true</IncludeSymbols>
